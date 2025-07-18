@@ -35,122 +35,63 @@ function calendar_events_shortcode() {
     <!-- Modal for adding event -->
     <div id="eventModal">
         <div>
-            <h3>Add Event</h3>
             <form id="eventForm">
                 <input type="hidden" id="event_date" name="event_date" />
                 <div>
-                    <label for="event_title">Title:</label>
-                    <input type="text" id="event_title" name="event_title" required />
+                    <label for="event_title"></label>
+                    <input type="text" id="event_title" name="event_title" required placeholder="Add tilte" />
+                </div>
+                <div id="selectedDay">
+                    <i class="fa-regular fa-clock" style="margin-right:4px;"></i>
+                    <span id="selectedDayText"></span>
                 </div>
                 <div>
                     <label for="event_description">Description:</label>
                     <textarea id="event_description" name="event_description"></textarea>
                 </div>
-                <div>
-                    <button type="submit">Save</button>
+                <div class="modal-actions">
+                    <button type="submit" class="pill-btn">Save</button>
                     <button type="button" id="closeModal">Cancel</button>
                 </div>
             </form>
         </div>
     </div>
+    <!-- ✅ Modal for viewing event -->
+    <div id="viewEventModal" style="display: none;">
+    <h2 id="viewEventTitle"></h2>
+    <p id="viewEventDate"></p>
+    <p id="viewEventDescription"></p>
+    <button id="closeViewModal">Close</button>
+    </div>
+    <!-- FullCalendar & JS includes below -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.css" rel="stylesheet" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.js"></script>
+    <script src="https://kit.fontawesome.com/a329bb9f5d.js" crossorigin="anonymous"></script>
     <script>
         var ajaxurl = '<?php echo admin_url('admin-ajax.php'); ?>';
-    </script>
-    <script>
-    jQuery(document).ready(function($) {
-        $('#calendar').fullCalendar({
-            header: {
-                left: 'prev,next today',
-                center: 'title',
-                right: 'month,agendaWeek,agendaDay'
-            },
-            editable: false,
-            eventLimit: true,
-            selectable: true,
-            selectHelper: true,
-            events: ajaxurl + '?action=calendar_events_fetch',
-            select: function(start, end) {
-                $('#event_date').val(start.format('YYYY-MM-DD'));
-                $('#event_title').val('');
-                $('#event_description').val('');
-                $('#eventModal').show();
-            }
-        });
-
-        $('#closeModal').on('click', function() {
-            $('#eventModal').hide();
-            $('#calendar').fullCalendar('unselect');
-        });
-
-        $('#eventForm').on('submit', function(e) {
-            e.preventDefault();
-            var title = $('#event_title').val();
-            var description = $('#event_description').val();
-            var event_date = $('#event_date').val();
-            if (title) {
-                $.post(ajaxurl, {
-                    action: 'calendar_events_add',
-                    title: title,
-                    description: description,
-                    event_date: event_date
-                }, function(response) {
-                    if (response.success) {
-                        $('#calendar').fullCalendar('refetchEvents');
-                        $('#eventModal').hide();
-                    } else {
-                        alert('Failed to add event.');
-                    }
-                });
-            }
-        });
-    });
     </script>
     <?php
     return ob_get_clean();
 }
-function calendar_events_enqueue_styles() {
+function calendar_events_enqueue_assets() {
     if (is_singular() && has_shortcode(get_post()->post_content, 'calendar_events')) {
         wp_enqueue_style(
             'calendar-events-css',
             plugins_url('assets/CSS/calendar.css', __FILE__)
         );
+        wp_enqueue_script(
+            'calendar-events-js',
+            plugins_url('assets/js/calendar.js', __FILE__),
+            array('jquery'), // dependencies
+            false,
+            true
+        );
+        // Pass ajaxurl to JS
+        wp_localize_script('calendar-events-js', 'ajaxurl', admin_url('admin-ajax.php'));
     }
 }
-add_action('wp_enqueue_scripts', 'calendar_events_enqueue_styles');
+add_action('wp_enqueue_scripts', 'calendar_events_enqueue_assets');
 
-// AJAX handler to fetch events
-add_action('wp_ajax_calendar_events_fetch', 'calendar_events_fetch');
-add_action('wp_ajax_nopriv_calendar_events_fetch', 'calendar_events_fetch');
-function calendar_events_fetch() {
-    global $wpdb;
-    $table = $wpdb->prefix . 'events';
-    $results = $wpdb->get_results("SELECT id, title, event_date as start FROM $table", ARRAY_A);
-    wp_send_json($results);
-}
-
-// AJAX handler to add events
-add_action('wp_ajax_calendar_events_add', 'calendar_events_add');
-add_action('wp_ajax_nopriv_calendar_events_add', 'calendar_events_add');
-function calendar_events_add() {
-    global $wpdb;
-    $table = $wpdb->prefix . 'events';
-    $title = sanitize_text_field($_POST['title']);
-    $description = sanitize_textarea_field($_POST['description']);
-    $event_date = sanitize_text_field($_POST['event_date']);
-    $end_date = $event_date;
-    $result = $wpdb->insert($table, [
-        'title' => $title,
-        'event_date' => $event_date,
-        'end_date' => $end_date,
-        'description' => $description
-    ]);
-    if ($result) {
-        wp_send_json_success();
-    } else {
-        wp_send_json_error();
-    }
-}
+require_once plugin_dir_path(__FILE__) . 'includes/ajax-handlers.php';

@@ -10,30 +10,112 @@ body {
   margin: 40px auto;
 }
 #eventModal {
-    display: none;
-    position: fixed;
-    top: 0; left: 0;
-    width: 100vw; height: 100vh;
-    background: rgba(0,0,0,0.5);
-    z-index: 9999;
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 9999;
 }
 #eventModal > div {
-    background: #fff;
-    max-width: 400px;
-    margin: 10vh auto;
-    padding: 20px;
-    border-radius: 8px;
-    position: relative;
+  background: #fff;
+  max-width: 400px;
+  margin: 10vh auto;
+  padding: 20px;
+  border-radius: 8px;
+  position: relative;
 }
 /* #eventForm {
     /* Add more form styles as needed */
 /* } */
 #eventForm label {
-    display: block;
-    margin-bottom: 4px;
+  display: block;
+  margin-bottom: 4px;
 }
 #eventForm input[type="text"],
 #eventForm textarea {
-    width: 100%;
-    margin-bottom: 10px;
+  width: 100%;
+
+  margin-bottom: 10px;
+}
+#event_title {
+  width: 100%;
+  padding: 8px;
+  border: none;
+  border-bottom: 2px solid #ccc;
+  border-radius: 0;
+  outline: none;
+}
+#selectedDay {
+  margin-top: 4px;
+  color: #666;
+  font-size: 0.95em;
+}
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 10px;
+}
+.pill-btn {
+  background: linear-gradient(90deg, #4f8cff 0%, #6ec6ff 100%);
+  color: #fff;
+  border: none;
+  border-radius: 999px;
+  padding: 8px 28px;
+  font-size: 1em;
+  font-weight: 500;
+  box-shadow: 0 2px 8px rgba(79, 140, 255, 0.15);
+  cursor: pointer;
+  transition: background 0.2s, box-shadow 0.2s;
+  outline: none;
+  margin-left: 10px;
+}
+.pill-btn:hover {
+  background: linear-gradient(90deg, #357ae8 0%, #5bb6ff 100%);
+  box-shadow: 0 4px 16px rgba(79, 140, 255, 0.25);
+}
+#closeModal {
+  background: none;
+  border: none;
+  color: #007bff; /* Bootstrap-like link blue */
+  text-decoration: underline;
+  cursor: pointer;
+  font-size: 1rem;
+  padding: 0;
+}
+
+#closeModal:hover {
+  color: #0056b3; /* Darker blue on hover */
+}
+#viewEventModal {
+  position: fixed;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -30%);
+  background: white;
+  padding: 20px;
+  border: 1px solid #ccc;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+}
+#closeViewModal {
+  background: linear-gradient(90deg, #4f8cff 0%, #6ec6ff 100%);
+  color: #fff;
+  border: none;
+  border-radius: 999px;
+  padding: 8px 28px;
+  font-size: 1em;
+  font-weight: 500;
+  box-shadow: 0 2px 8px rgba(79, 140, 255, 0.15);
+  cursor: pointer;
+  transition: background 0.2s, box-shadow 0.2s;
+  outline: none;
+  margin-left: 10px;
+}
+#closeViewModal:hover {
+  background: linear-gradient(90deg, #357ae8 0%, #5bb6ff 100%);
+  box-shadow: 0 4px 16px rgba(79, 140, 255, 0.25);
 }
