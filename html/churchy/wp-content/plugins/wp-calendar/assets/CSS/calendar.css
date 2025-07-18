@@ -1,3 +1,4 @@
+/* === General Page Styles === */
 body {
   margin: 0;
   padding: 0;
@@ -5,41 +6,56 @@ body {
   font-size: 14px;
 }
 
+/* === Calendar Container === */
 #calendar {
   max-width: 900px;
-  margin: 40px auto;
+  margin: 40px auto; /* Centered calendar with top margin */
 }
+
+/* === Calendar Day Name Header Styles === */
+.fc-day-header {
+  background-color: #e142b4;
+  color: #333;
+  font-weight: bold;
+  padding: 10px;
+}
+
+/* === Modal Container for Creating Events === */
 #eventModal {
-  display: none;
-  position: fixed;
+  display: none; /* Hidden by default */
+  position: fixed; /* Stays in view */
   top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: rgba(0, 0, 0, 0.5);
-  z-index: 9999;
+  background: rgba(0, 0, 0, 0.5); /* Dark overlay */
+  z-index: 9999; /* Sits above most elements */
 }
+
+/* === Modal Content Box === */
 #eventModal > div {
   background: #fff;
   max-width: 400px;
-  margin: 10vh auto;
+  margin: 10vh auto; /* Vertically centered */
   padding: 20px;
   border-radius: 8px;
   position: relative;
 }
-/* #eventForm {
-    /* Add more form styles as needed */
-/* } */
+
+/* === Event Form Styles === */
 #eventForm label {
   display: block;
   margin-bottom: 4px;
 }
+
+/* Inputs and textarea fields inside the form */
 #eventForm input[type="text"],
 #eventForm textarea {
   width: 100%;
-
   margin-bottom: 10px;
 }
+
+/* Custom style for the title input */
 #event_title {
   width: 100%;
   padding: 8px;
@@ -48,22 +64,28 @@ body {
   border-radius: 0;
   outline: none;
 }
+
+/* Small text below the input showing selected date */
 #selectedDay {
   margin-top: 4px;
   color: #666;
   font-size: 0.95em;
 }
+
+/* Modal button container aligned to the right */
 .modal-actions {
   display: flex;
   justify-content: flex-end;
   gap: 10px;
   margin-top: 10px;
 }
+
+/* === Reusable Pill Button Style (used for Save/Close) === */
 .pill-btn {
   background: linear-gradient(90deg, #4f8cff 0%, #6ec6ff 100%);
   color: #fff;
   border: none;
-  border-radius: 999px;
+  border-radius: 999px; /* Full pill shape */
   padding: 8px 28px;
   font-size: 1em;
   font-weight: 500;
@@ -73,23 +95,30 @@ body {
   outline: none;
   margin-left: 10px;
 }
+
+/* Pill button hover state */
 .pill-btn:hover {
   background: linear-gradient(90deg, #357ae8 0%, #5bb6ff 100%);
   box-shadow: 0 4px 16px rgba(79, 140, 255, 0.25);
 }
+
+/* === Cancel Button: Styled as a Link === */
 #closeModal {
   background: none;
   border: none;
-  color: #007bff; /* Bootstrap-like link blue */
+  color: #007bff; /* Bootstrap-style blue */
   text-decoration: underline;
   cursor: pointer;
   font-size: 1rem;
   padding: 0;
 }
 
+/* Cancel button hover style */
 #closeModal:hover {
-  color: #0056b3; /* Darker blue on hover */
+  color: #0056b3; /* Darker blue */
 }
+
+/* === Modal for Viewing Event Details === */
 #viewEventModal {
   position: fixed;
   top: 30%;
@@ -101,6 +130,8 @@ body {
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
   z-index: 1000;
 }
+
+/* Close button inside View Event modal */
 #closeViewModal {
   background: linear-gradient(90deg, #4f8cff 0%, #6ec6ff 100%);
   color: #fff;
@@ -115,6 +146,8 @@ body {
   outline: none;
   margin-left: 10px;
 }
+
+/* Hover effect for close button in view modal */
 #closeViewModal:hover {
   background: linear-gradient(90deg, #357ae8 0%, #5bb6ff 100%);
   box-shadow: 0 4px 16px rgba(79, 140, 255, 0.25);
