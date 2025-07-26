@@ -32,7 +32,7 @@ body {
   z-index: 9999; /* Sits above most elements */
 }
 
-/* === Modal Content Box === */
+/* === Modal Content Box === */  
 #eventModal > div {
   background: #fff;
   max-width: 400px;
