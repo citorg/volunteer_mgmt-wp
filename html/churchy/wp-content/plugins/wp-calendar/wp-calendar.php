@@ -1,4 +1,5 @@
 <?php
+
 /*
 Plugin Name: Calendar Events
 Description: Simple event calendar with database table and AJAX fetch.
@@ -31,31 +32,7 @@ add_shortcode('calendar_events', 'calendar_events_shortcode');
 function calendar_events_shortcode() {
     ob_start();
     ?>
-    <div id="calendar"></div>
-    <!-- Modal for adding event -->
-    <div id="eventModal">
-        <div>
-            <form id="eventForm">
-                <input type="hidden" id="event_date" name="event_date" />
-                <div>
-                    <label for="event_title"></label>
-                    <input type="text" id="event_title" name="event_title" required placeholder="Add tilte" />
-                </div>
-                <div id="selectedDay">
-                    <i class="fa-regular fa-clock" style="margin-right:4px;"></i>
-                    <span id="selectedDayText"></span>
-                </div>
-                <div>
-                    <label for="event_description">Description:</label>
-                    <textarea id="event_description" name="event_description"></textarea>
-                </div>
-                <div class="modal-actions">
-                    <button type="submit" class="pill-btn">Save</button>
-                    <button type="button" id="closeModal">Cancel</button>
-                </div>
-            </form>
-        </div>
-    </div>
+    <div id="calendar"></div>    
     <!-- ✅ Modal for viewing event -->
     <div id="viewEventModal" style="display: none;">
     <h2 id="viewEventTitle"></h2>
@@ -69,14 +46,13 @@ function calendar_events_shortcode() {
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.js"></script>
     <script src="https://kit.fontawesome.com/a329bb9f5d.js" crossorigin="anonymous"></script>
-    <script>
-        var ajaxurl = '<?php echo admin_url('admin-ajax.php'); ?>';
-    </script>
+    
     <?php
     return ob_get_clean();
 }
 function calendar_events_enqueue_assets() {
     if (is_singular() && has_shortcode(get_post()->post_content, 'calendar_events')) {
+
         wp_enqueue_style(
             'calendar-events-css',
             plugins_url('assets/CSS/calendar.css', __FILE__)
@@ -89,9 +65,10 @@ function calendar_events_enqueue_assets() {
             true
         );
         // Pass ajaxurl to JS
-        wp_localize_script('calendar-events-js', 'ajaxurl', admin_url('admin-ajax.php'));
+        wp_localize_script('calendar-events-js', 'calendarEventsAjax', array('ajaxurl' => admin_url('admin-ajax.php')));
     }
 }
 add_action('wp_enqueue_scripts', 'calendar_events_enqueue_assets');
 
 require_once plugin_dir_path(__FILE__) . 'includes/ajax-handlers.php';
+require_once plugin_dir_path(__FILE__) . 'admin/admin-page.php';

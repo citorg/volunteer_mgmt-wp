@@ -2,7 +2,7 @@
 add_action('wp_ajax_calendar_events_fetch', 'calendar_events_fetch');
 add_action('wp_ajax_nopriv_calendar_events_fetch', 'calendar_events_fetch');
 function calendar_events_fetch() {
-    global $wpdb;
+        global $wpdb;
     $table = $wpdb->prefix . 'events';
     $results = $wpdb->get_results("
         SELECT

@@ -1,0 +1,47 @@
+# Ignore WordPress core files and folders
+wp-config.php
+wp-content/uploads/
+wp-content/cache/
+wp-content/upgrade/
+wp-content/plugins/your-plugin-name/node_modules/
+wp-content/plugins/your-plugin-name/dist/
+wp-content/plugins/your-plugin-name/build/
+
+# Ignore local environment files
+.env
+.env.local
+.env.*.local
+
+# Ignore OS files
+.DS_Store
+Thumbs.db
+
+# Ignore IDE/editor files
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Ignore logs and debug files
+*.log
+debug.log
+
+# Ignore composer vendor folder (if used)
+vendor/
+
+# Ignore npm/yarn package folders (if used)
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Ignore build artifacts and temp files
+*.zip
+*.tar.gz
+*.tmp
+*.cache
+
+# Ignore backup and dump files
+*.bak
+*.sql
+*.sqlite
+notes.txt

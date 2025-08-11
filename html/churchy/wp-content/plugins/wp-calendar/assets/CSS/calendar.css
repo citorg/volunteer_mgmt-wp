@@ -19,28 +19,37 @@ body {
   font-weight: bold;
   padding: 10px;
 }
+.admin-header {
+  text-align: center;
+  font-size: 24px;
+  color: #333;
+  margin-bottom: 20px;
+}
 
 /* === Modal Container for Creating Events === */
 #eventModal {
-  display: none; /* Hidden by default */
-  position: fixed; /* Stays in view */
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: rgba(0, 0, 0, 0.5); /* Dark overlay */
-  z-index: 9999; /* Sits above most elements */
+  display: block;            
+  position: relative;        
+  width: 100%;               
+  height: auto;              
+  background: transparent;   
+  padding: 0;                
+  margin: 20px 0;            
+  box-shadow: none;          
+  border: none;              
+  z-index: auto;             
 }
 
-/* === Modal Content Box === */  
 #eventModal > div {
-  background: #fff;
-  max-width: 400px;
-  margin: 10vh auto; /* Vertically centered */
+  background: #fff;          
+  max-width: 600px;          
+  margin: 0 auto;            
   padding: 20px;
   border-radius: 8px;
+  box-shadow: 0 0 8px rgba(0,0,0,0.1); 
   position: relative;
 }
+
 
 /* === Event Form Styles === */
 #eventForm label {
@@ -80,7 +89,7 @@ body {
   margin-top: 10px;
 }
 
-/* === Reusable Pill Button Style (used for Save/Close) === */
+
 .pill-btn {
   background: linear-gradient(90deg, #4f8cff 0%, #6ec6ff 100%);
   color: #fff;
