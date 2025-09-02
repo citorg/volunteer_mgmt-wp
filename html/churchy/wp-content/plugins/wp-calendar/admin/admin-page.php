@@ -47,6 +47,7 @@ function calendar_events_admin_page() {
             </div>
             <!-- add here a list of events  -->
         </div>
+    <script src="https://kit.fontawesome.com/a329bb9f5d.js" crossorigin="anonymous"></script>
     <?php
 }
 
