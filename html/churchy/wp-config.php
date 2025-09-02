@@ -23,13 +23,13 @@
 define( 'DB_NAME', 'churchschema' );
 
 /** Database username */
-define( 'DB_USER', 'ldapeno' );
+define( 'DB_USER', 'admin' );
 
 /** Database password */
-define( 'DB_PASSWORD', <password_placeholder> );
+define( 'DB_PASSWORD', 'VeryS3cur3P@ssw0rd!');
 
 /** Database hostname */
-define( 'DB_HOST', 'localhost:30666' );
+define( 'DB_HOST', 'localhost:3306' );
 
 /** Database charset to use in creating database tables. */
 define( 'DB_CHARSET', 'utf8' );
